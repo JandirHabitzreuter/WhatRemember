@@ -1,0 +1,8 @@
+{
+  "name": "WhatRemember",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/JandirHabitzreuter/WhatRemember.git",
+  "author": "Jandir Luiz Habitzreuter <dyjandir@hotmail.com>",
+  "license": "MIT"
+}
