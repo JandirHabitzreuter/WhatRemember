@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
-    "run-migrate" : "prisma migrate dev" 
+    "run-migrate": "prisma migrate dev"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
