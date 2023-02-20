@@ -68,6 +68,6 @@ model User_Phrase {
     date      DateTime           @default(now())
     count     Int //field to indicated how many times this phrase was shown to the user  
 
-    @@index([id_user, id_phrase])
+    @@unique(fields:[id_user, id_phrase], name: "uni_user_phrase")
     @@map("user_phrase")
 }

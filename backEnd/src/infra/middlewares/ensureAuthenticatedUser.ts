@@ -20,7 +20,6 @@ export default async function (
     }
 
     const [, userToken] = bearerToken.split(" ");
-    console.log(userToken);
 
     try {
         const { id } = verify(
@@ -28,8 +27,6 @@ export default async function (
             "$2y$10$BD.yyHw4yj40N.wCO4wJbed1W7z/fEklWR1Ok4p7DL.v9Ln4S.z6e",
             { algorithms: ["HS256"] }
         ) as IPayLoad;
-
-        console.log(id);
 
         const userRepository = new UserRepositoryPrisma();
         const user = await userRepository.findUserById(id);
