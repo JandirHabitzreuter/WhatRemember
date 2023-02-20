@@ -11,7 +11,11 @@ class CreateUserUseCase {
         private userRepository: IUserRepository
     ) {}
 
-    async execute({ username, email, password }: IRequestUserDto) {
+    async execute({
+        username,
+        email,
+        password,
+    }: IRequestUserDto): Promise<void> {
         const user = await this.userRepository.findUserByEmail(email);
 
         if (user) {
