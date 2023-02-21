@@ -15,6 +15,7 @@ class CreateUserUseCase {
         username,
         email,
         password,
+        type,
     }: IRequestUserDto): Promise<void> {
         const user = await this.userRepository.findUserByEmail(email);
 
@@ -28,7 +29,7 @@ class CreateUserUseCase {
             username,
             email,
             password: password_hash,
-            type: 1,
+            type,
         });
     }
 }
