@@ -10,6 +10,7 @@ class UserRepositoryPrisma implements IUserRepository {
         password,
         type,
     }: IRequestUserDto): Promise<void> {
+        console.log(type);
         const user = await prisma.user.create({
             data: { username, email, password, type },
         });

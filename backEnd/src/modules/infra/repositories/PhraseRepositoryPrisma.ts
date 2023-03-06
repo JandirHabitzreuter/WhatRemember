@@ -17,7 +17,7 @@ class PhraseRepositoryPrisma implements IPhraseRepository {
                 translate,
                 option1,
                 option2,
-                // rating, ver como passar aqui
+                rating,
                 id_theme,
             },
         });

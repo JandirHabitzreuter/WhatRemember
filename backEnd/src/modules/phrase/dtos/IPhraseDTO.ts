@@ -1,4 +1,4 @@
-import { Rating_Phrase } from "@infra/util/Enum";
+import { Rating_Phrase } from "@database/prismaClient";
 
 interface IRequestPhraseDto {
     description: string;

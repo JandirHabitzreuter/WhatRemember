@@ -23,12 +23,17 @@ enum Rating_User_Phrase {
     DONT_REMEMBER
 }
 
+enum Type_user {
+    ADMIN
+    USER
+}
+
 model User {
     id          String        @id @default(uuid())
     username    String
     email       String        @unique
     password    String
-    type        Int
+    type        Type_user     @default(USER)
     User_Phrase User_Phrase[]
 
     @@map("user")
@@ -68,6 +73,6 @@ model User_Phrase {
     date      DateTime           @default(now())
     count     Int //field to indicated how many times this phrase was shown to the user  
 
-    @@unique(fields:[id_user, id_phrase], name: "uni_user_phrase")
+    @@unique(fields: [id_user, id_phrase], name: "uni_user_phrase")
     @@map("user_phrase")
 }
