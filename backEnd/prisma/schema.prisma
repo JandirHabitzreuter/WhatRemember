@@ -2,77 +2,77 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 enum Rating_Phrase {
-    EASY
-    MEDIUM
-    HARD
+  EASY
+  MEDIUM
+  HARD
 }
 
 enum Rating_User_Phrase {
-    EASY
-    MEDIUM
-    HARD
-    DONT_REMEMBER
+  EASY
+  MEDIUM
+  HARD
+  DONT_REMEMBER
 }
 
 enum Type_user {
-    ADMIN
-    USER
+  ADMIN
+  USER
 }
 
 model User {
-    id          String        @id @default(uuid())
-    username    String
-    email       String        @unique
-    password    String
-    type        Type_user     @default(USER)
-    User_Phrase User_Phrase[]
+  id          String        @id @default(uuid())
+  username    String
+  email       String        @unique
+  password    String
+  type        Type_user     @default(USER)
+  User_Phrase User_Phrase[]
 
-    @@map("user")
+  @@map("user")
 }
 
 model Theme {
-    id          String   @id @default(uuid())
-    name        String   @unique
-    description String
-    Phrase      Phrase[]
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String
+  Phrase      Phrase[]
 
-    @@map("theme")
+  @@map("theme")
 }
 
 model Phrase {
-    id          String        @id @default(uuid())
-    description String
-    translate   String
-    option1     String
-    option2     String
-    rating      Rating_Phrase @default(EASY)
-    id_theme    String
-    theme       Theme         @relation(fields: [id_theme], references: [id], onDelete: Restrict, onUpdate: Restrict)
-    User_Phrase User_Phrase[]
+  id          String        @id @default(uuid())
+  description String
+  translate   String
+  option1     String
+  option2     String
+  rating      Rating_Phrase @default(EASY)
+  id_theme    String
+  theme       Theme         @relation(fields: [id_theme], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  User_Phrase User_Phrase[]
 
-    @@map("phrase")
+  @@map("phrase")
 }
 
 model User_Phrase {
-    id        String             @id @default(uuid())
-    id_user   String
-    user      User               @relation(fields: [id_user], references: [id], onDelete: Restrict, onUpdate: Restrict)
-    id_phrase String
-    phrase    Phrase             @relation(fields: [id_phrase], references: [id], onDelete: Restrict, onUpdate: Restrict)
-    rating    Rating_User_Phrase @default(EASY)
-    time      DateTime
-    date      DateTime           @default(now())
-    count     Int //field to indicated how many times this phrase was shown to the user  
+  id        String             @id @default(uuid())
+  id_user   String
+  user      User               @relation(fields: [id_user], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  id_phrase String
+  phrase    Phrase             @relation(fields: [id_phrase], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  rating    Rating_User_Phrase @default(EASY)
+  time      DateTime
+  date      DateTime           @default(now())
+  count     Int //field to indicated how many times this phrase was shown to the user  
 
-    @@unique(fields: [id_user, id_phrase], name: "uni_user_phrase")
-    @@map("user_phrase")
+  @@unique(fields: [id_user, id_phrase], name: "uni_user_phrase")
+  @@map("user_phrase")
 }
