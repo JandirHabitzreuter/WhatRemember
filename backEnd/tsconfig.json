@@ -1,26 +1,34 @@
 {
-    "compilerOptions": {
-        "target": "es2016",
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "module": "commonjs",
-        "baseUrl": "./src",
-        "paths": {
-            "@modules/*": [
-                "modules/*"
-            ],
-            "@database/*": [
-                "database/*"
-            ],
-            "@infra/*": [
-                "infra/*"
-            ]
-        },
-        "outDir": "./dist",
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "skipLibCheck": true,
-        "resolveJsonModule":true,
-        
-    }
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./dist",    
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": false,            
+    "baseUrl": "./src",
+    "paths": {
+        "@modules/*": [
+            "modules/*"
+        ],
+        "@database/*": [
+            "database/*"
+        ],
+        "@infra/*": [
+            "infra/*"
+        ]
+    },    
+    "esModuleInterop": true,    
+    "resolveJsonModule":true,
+  }
 }
