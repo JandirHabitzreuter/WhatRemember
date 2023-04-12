@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post, Put, Delete } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiBody,
@@ -48,5 +48,33 @@ export class ThemesController {
   @HttpCode(201)
   create(@Body() body: CreateThemeDto) {
     return this.themesService.create(body);
+  }
+
+  @ApiOperation({ summary: 'Update a theme' })
+  @ApiBody({
+    type: CreateThemeDto,
+    description: 'Update a theme',
+    required: true,
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'The theme has been successfully updated.',
+  })
+  @ApiResponse({
+    status: 422,
+    description: 'The theme not found.',
+  })
+  @Put()
+  @HttpCode(201)
+  update(@Body() body: CreateThemeDto) {
+    return this.themesService.update(body);
+  }
+  
+  @ApiOperation({ summary: 'Delete a theme' })
+  @Delete()  
+  @HttpCode(200)
+  delete(@Body() body: CreateThemeDto){ 
+    const {name} = body;
+    return this.themesService.delete(name);
   }
 }
