@@ -1,41 +1,66 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Rating_Phrase } from '@prisma/client';
-import { Expose, Type } from 'class-transformer';
-import { IsEnum, IsIn, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { Expose} from 'class-transformer';
+import { IsEnum,IsNotEmpty, IsString, IsUUID } from 'class-validator';
 
 export class CreatePhraseDto {
   @Expose()
   @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty()  
+  @ApiProperty({  
+      required: false,    
+      description: 'The description of the phrase',
+      example: 'My phrase is correct!',
+    })
   description: string;
 
   @Expose()
   @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty()  
+  @ApiProperty({  
+      required: false,    
+      description: 'The correct translation of the phrase',
+      example: 'Minha frase está correta!',
+    })
   translate: string;
 
   @Expose()
   @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty()  
+  @ApiProperty({  
+      required: false,    
+      description: 'The incorrect translation of the phrase',
+      example: 'Minha pergunta está correta!',
+    })
   option1: string;
 
   @Expose()
   @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty()  
+  @ApiProperty({  
+      required: false,    
+      description: 'The incorrect translation of the phras',
+      example: 'Minha frase está incorreta!',
+    })
   option2: string;
 
   @Expose()
   @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty()  
   @IsEnum(Rating_Phrase)
   @ApiProperty({
     enum: Rating_Phrase,
     required: true,
   })
+  @ApiProperty({  
+      required: false,    
+      description: 'The rating of the phrase',
+      example: 'EASY',
+    })
   rating: Rating_Phrase;
 
   @Expose()
   @IsUUID()
-  @IsNotEmpty()
+  @IsNotEmpty()    
   id_theme: string;
 }

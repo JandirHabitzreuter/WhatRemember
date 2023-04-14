@@ -1,4 +1,4 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException,UnprocessableEntityException } from '@nestjs/common';
 import { CreatePhraseDto } from './dto/create-phrase.dto';
 import { UpdatePhraseDto } from './dto/update-phrase.dto';
 import { PrismaService } from '@database/database.service';
@@ -15,7 +15,17 @@ export class PhrasesService {
     });
 
     if (!theme) {
-      throw new NotFoundException('Theme not found');
+      throw new NotFoundException('The Theme was not found!');
+    }
+
+    const phrase = await this.prisma.phrase.findFirst({
+      where: {
+        description:createPhraseDto.description
+      }
+    });
+
+    if (phrase){
+      throw new UnprocessableEntityException('Phrase already exists.');
     }
 
     return this.prisma.phrase.create({
@@ -25,17 +35,47 @@ export class PhrasesService {
 
   findAll() {
     return this.prisma.phrase.findMany();
+  } 
+
+  async update(id: string, updatePhraseDto: UpdatePhraseDto) {
+
+    const { id_theme } = updatePhraseDto;
+
+    if (id_theme){
+      const theme = await this.prisma.theme.findFirst({
+        where: {
+          id: updatePhraseDto.id_theme,
+        },
+      });
+  
+      if (!theme) {
+        throw new NotFoundException('The Theme was not found!');
+      }
+    }   
+
+    return this.prisma.phrase.update({
+      where:{
+        id
+      },
+      data: updatePhraseDto,
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} phrase`;
-  }
+  async remove(id: string) {
+    const phrase = await this.prisma.phrase.findUnique({
+      where:{
+        id
+      }
+    });
 
-  update(id: number, updatePhraseDto: UpdatePhraseDto) {
-    return `This action updates a #${id} phrase`;
-  }
+    if (!phrase){
+      throw new NotFoundException('The phrase was not found!');
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} phrase`;
+    return this.prisma.phrase.delete({
+      where:{
+        id
+      }
+    });
   }
 }
