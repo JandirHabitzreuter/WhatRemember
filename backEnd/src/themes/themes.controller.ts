@@ -53,7 +53,7 @@ export class ThemesController {
 
   @ApiOperation({ summary: 'Update a theme' })
   @ApiBody({
-    type: CreateThemeDto,
+    type: UpdateThemeDto,
     description: 'Update a theme',
     required: true,
   })
