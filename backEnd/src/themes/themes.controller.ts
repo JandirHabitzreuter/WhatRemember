@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post, Put, Delete,Param } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiBody,
@@ -9,6 +9,7 @@ import {
 import { CreateThemeDto } from './dto/create-theme.dto';
 import { ThemesService } from './themes.service';
 import { ThemeDto } from './dto/theme.dto';
+import { UpdateThemeDto } from './dto/update-theme.dto';
 
 @ApiResponse({
   status: 403,
@@ -48,5 +49,32 @@ export class ThemesController {
   @HttpCode(201)
   create(@Body() body: CreateThemeDto) {
     return this.themesService.create(body);
+  }
+
+  @ApiOperation({ summary: 'Update a theme' })
+  @ApiBody({
+    type: UpdateThemeDto,
+    description: 'Update a theme',
+    required: true,
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'The theme has been successfully updated.',
+  })
+  @ApiResponse({
+    status: 422,
+    description: 'The theme was not found.',
+  })
+  @Put(':id')
+  @HttpCode(201)
+  update(@Param('id') id: string, @Body() body: UpdateThemeDto) {
+    return this.themesService.update(id, body);
+  }
+  
+  @ApiOperation({ summary: 'Delete a theme' })
+  @Delete(':id')  
+  @HttpCode(200)
+  delete(@Param('id') id: string){    
+    return this.themesService.delete(id);
   }
 }
