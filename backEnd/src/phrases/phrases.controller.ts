@@ -20,7 +20,6 @@ import { PhraseDto } from './dto/Phrase.dto';
 @ApiTags('phrases')
 @Controller('phrases')
 
-@Controller('phrases')
 export class PhrasesController {
   constructor(private readonly phrasesService: PhrasesService) {}
 

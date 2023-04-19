@@ -56,12 +56,9 @@ export class UpdatePhraseDto{
     @ApiProperty({
       enum: Rating_Phrase,
       required: true,
+      description: 'The rating of the phrase',
+      example: 'EASY',
     })
-    @ApiProperty({  
-        required: false,    
-        description: 'The rating of the phrase',
-        example: 'EASY',
-      })
     rating: Rating_Phrase;
   
     @Expose()
