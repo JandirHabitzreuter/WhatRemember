@@ -1,12 +1,13 @@
-import { Button, ChakraProvider } from '@chakra-ui/react';
-import Hello from './pages/Hello';
+import { ChakraProvider } from '@chakra-ui/react';
+import { LoginPage } from './pages/Login';
+import { theme } from './theme/theme';
 
 function App() {
-  return (
-    <ChakraProvider>
-      <Hello />
-    </ChakraProvider>
-  );
+	return (
+		<ChakraProvider theme={theme}>
+			<LoginPage />
+		</ChakraProvider>
+	);
 }
 
 export default App;
