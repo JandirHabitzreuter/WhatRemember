@@ -3,6 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '@database/database.service';
 import { Prisma, User } from '@prisma/client';
+import { hash } from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -33,6 +34,8 @@ export class UsersService {
   async create(createUserDto: CreateUserDto) {
 
     await this.verifyIFEmailOrUserNameAlreadyInUse(createUserDto.email, createUserDto.username); 
+    
+    createUserDto.password = await hash(createUserDto.password, 8);
 
     return this.prisma.user.create({
       data: createUserDto
@@ -56,6 +59,22 @@ export class UsersService {
 
     return user;
   }
+
+  async findUserByUserName(username : string) : Promise<User>{
+    const user = this.prisma.user.findFirst({
+      where:{
+        username
+      } 
+   }); 
+  
+   if(!user){
+      throw new NotFoundException('Username was not found!');
+    }
+
+   return user;
+
+  }
+  
 
   async update(id: string, updateUserDto: UpdateUserDto) {
 

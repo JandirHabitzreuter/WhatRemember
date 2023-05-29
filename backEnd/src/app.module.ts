@@ -7,16 +7,22 @@ import { PhrasesModule } from './phrases/phrases.module';
 import { UsersModule } from './users/users.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from 'authorizathion/authorizathion.guard';
-import { AuthenticationGuard } from 'authentication/authentication.guard';
+import { AuthenticationModule } from './authentication/authentication.module';
+import { AuthenticationService } from './authentication/authentication.service';
+import { JwtService } from '@nestjs/jwt';
+import { JwtAuthGuard } from 'authentication/jwt-auth.guard';
 
 @Module({
-  imports: [ThemesModule, PhrasesModule, UsersModule],
-  controllers: [],
+  imports: [ThemesModule, PhrasesModule, UsersModule, AuthenticationModule],
+  controllers: [AppController],
   providers: [PrismaService,
-               {provide: APP_GUARD,
-               useClass: AuthenticationGuard},
-               {provide: APP_GUARD,
-                useClass: RolesGuard},
+              AppService,
+              AuthenticationService,
+              JwtService, 
+              {provide: APP_GUARD,
+               useClass: JwtAuthGuard},
+              {provide: APP_GUARD,
+               useClass: RolesGuard},
               
               ],
 
