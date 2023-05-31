@@ -5,7 +5,7 @@
         "jest":true
     },
     "extends": [
-        "airbnb-base",
+        "airbnb-base/legacy",
         "plugin:@typescript-eslint/recommended",
         "prettier",
         "plugin:prettier/recommended"
