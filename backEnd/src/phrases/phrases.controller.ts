@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Put,
+  Param,
+  Delete,
+  HttpCode,
+  HttpStatus,
+} from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiBody,
@@ -6,20 +16,19 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { PhrasesService } from './phrases.service';
+
 import { CreatePhraseDto } from './dto/create-phrase.dto';
-import { UpdatePhraseDto } from './dto/update-phrase.dto';
 import { PhraseDto } from './dto/Phrase.dto';
+import { UpdatePhraseDto } from './dto/update-phrase.dto';
+import { PhrasesService } from './phrases.service';
 
 @ApiResponse({
   status: HttpStatus.FORBIDDEN,
   description: 'Forbidden.',
 })
-
 @ApiBearerAuth('access-token')
 @ApiTags('phrases')
 @Controller('phrases')
-
 export class PhrasesController {
   constructor(private readonly phrasesService: PhrasesService) {}
 
@@ -45,12 +54,12 @@ export class PhrasesController {
   @ApiOperation({ summary: 'List phrases' })
   @ApiResponse({
     status: HttpStatus.OK,
-    type: PhraseDto    
+    type: PhraseDto,
   })
   @Get()
   findAll() {
     return this.phrasesService.findAll();
-  } 
+  }
 
   @ApiOperation({ summary: 'Update a phrase' })
   @ApiBody({
@@ -65,7 +74,7 @@ export class PhrasesController {
   @ApiResponse({
     status: HttpStatus.UNPROCESSABLE_ENTITY,
     description: 'The phrase was not found.',
-  })  
+  })
   @HttpCode(HttpStatus.OK)
   @Put(':id')
   update(@Param('id') id: string, @Body() updatePhraseDto: UpdatePhraseDto) {
@@ -73,7 +82,7 @@ export class PhrasesController {
   }
 
   @ApiOperation({ summary: 'Delete a phrase' })
-  @Delete(':id')  
+  @Delete(':id')
   @HttpCode(HttpStatus.OK)
   @Delete(':id')
   remove(@Param('id') id: string) {

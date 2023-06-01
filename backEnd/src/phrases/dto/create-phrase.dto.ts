@@ -1,52 +1,53 @@
+import { Expose } from 'class-transformer';
+import { IsEnum, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+
 import { ApiProperty } from '@nestjs/swagger';
 import { Rating_Phrase } from '@prisma/client';
-import { Expose} from 'class-transformer';
-import { IsEnum,IsNotEmpty, IsString, IsUUID } from 'class-validator';
 
 export class CreatePhraseDto {
   @Expose()
   @IsString()
-  @IsNotEmpty()  
-  @ApiProperty({  
-      required: false,    
-      description: 'The description of the phrase',
-      example: 'My phrase is correct!',
-    })
+  @IsNotEmpty()
+  @ApiProperty({
+    required: false,
+    description: 'The description of the phrase',
+    example: 'My phrase is correct!',
+  })
   description: string;
 
   @Expose()
   @IsString()
-  @IsNotEmpty()  
-  @ApiProperty({  
-      required: false,    
-      description: 'The correct translation of the phrase',
-      example: 'Minha frase está correta!',
-    })
+  @IsNotEmpty()
+  @ApiProperty({
+    required: false,
+    description: 'The correct translation of the phrase',
+    example: 'Minha frase está correta!',
+  })
   translate: string;
 
   @Expose()
   @IsString()
-  @IsNotEmpty()  
-  @ApiProperty({  
-      required: false,    
-      description: 'The incorrect translation of the phrase',
-      example: 'Minha pergunta está correta!',
-    })
+  @IsNotEmpty()
+  @ApiProperty({
+    required: false,
+    description: 'The incorrect translation of the phrase',
+    example: 'Minha pergunta está correta!',
+  })
   option1: string;
 
   @Expose()
   @IsString()
-  @IsNotEmpty()  
-  @ApiProperty({  
-      required: false,    
-      description: 'The incorrect translation of the phras',
-      example: 'Minha frase está incorreta!',
-    })
+  @IsNotEmpty()
+  @ApiProperty({
+    required: false,
+    description: 'The incorrect translation of the phras',
+    example: 'Minha frase está incorreta!',
+  })
   option2: string;
 
   @Expose()
   @IsString()
-  @IsNotEmpty()  
+  @IsNotEmpty()
   @IsEnum(Rating_Phrase)
   @ApiProperty({
     enum: Rating_Phrase,
@@ -58,6 +59,6 @@ export class CreatePhraseDto {
 
   @Expose()
   @IsUUID()
-  @IsNotEmpty()    
+  @IsNotEmpty()
   id_theme: string;
 }
