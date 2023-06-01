@@ -1,9 +1,9 @@
 import {
-    PrismaClient,
-    Rating_Phrase,
-    Rating_User_Phrase,
-    Type_user,
-} from "@prisma/client";
+  PrismaClient,
+  Rating_Phrase,
+  Rating_User_Phrase,
+  Type_user,
+} from '@prisma/client';
 
 const prisma = new PrismaClient();
 

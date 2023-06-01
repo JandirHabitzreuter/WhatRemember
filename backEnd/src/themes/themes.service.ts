@@ -4,6 +4,7 @@ import {
   Injectable,
   UnprocessableEntityException,
 } from '@nestjs/common';
+
 import { CreateThemeDto } from './dto/create-theme.dto';
 import { UpdateThemeDto } from './dto/update-theme.dto';
 
@@ -12,15 +13,15 @@ export class ThemesService {
   constructor(@Inject(PrismaService) readonly prisma: PrismaService) {}
 
   async findAll() {
-    return await this.prisma.theme.findMany();
+    return this.prisma.theme.findMany();
   }
 
-  async create(createThemeDto: CreateThemeDto) {    
+  async create(createThemeDto: CreateThemeDto) {
     const theme = await this.prisma.theme.findUnique({
       where: {
         name: createThemeDto.name,
       },
-    });    
+    });
 
     if (theme) {
       throw new UnprocessableEntityException('Theme already exists.');
@@ -43,17 +44,17 @@ export class ThemesService {
     }
 
     return this.prisma.theme.update({
-      where:{
+      where: {
         id: id,
       },
-      data:updateThemeDto
+      data: updateThemeDto,
     });
   }
 
-  async delete(id : string) {    
+  async delete(id: string) {
     const theme = await this.prisma.theme.findUnique({
       where: {
-        id:id,
+        id: id,
       },
     });
 
@@ -61,12 +62,10 @@ export class ThemesService {
       throw new UnprocessableEntityException('The Theme was not found.');
     }
 
-    return await this.prisma.theme.delete({
-      where:{
-        id:id,
-      },      
+    return this.prisma.theme.delete({
+      where: {
+        id: id,
+      },
     });
   }
-
-
 }

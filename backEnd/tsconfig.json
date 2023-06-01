@@ -8,27 +8,21 @@
     "allowSyntheticDefaultImports": true,
     "target": "es2017",
     "sourceMap": true,
-    "outDir": "./dist",    
+    "outDir": "./dist",
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": false,            
+    "noFallthroughCasesInSwitch": false,
     "baseUrl": "./src",
     "paths": {
-        "@modules/*": [
-            "modules/*"
-        ],
-        "@database/*": [
-            "database/*"
-        ],
-        "@infra/*": [
-            "infra/*"
-        ]
-    },    
-    "esModuleInterop": true,    
-    "resolveJsonModule":true,
+      "@modules/*": ["modules/*"],
+      "@database/*": ["database/*"],
+      "@infra/*": ["infra/*"]
+    },
+    "esModuleInterop": true,
+    "resolveJsonModule": true
   }
 }

@@ -1,4 +1,13 @@
-import { Body, Controller, Get, HttpCode, Post, Put, Delete,Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  Put,
+  Delete,
+  Param,
+} from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiBody,
@@ -6,10 +15,11 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+
 import { CreateThemeDto } from './dto/create-theme.dto';
-import { ThemesService } from './themes.service';
 import { ThemeDto } from './dto/theme.dto';
 import { UpdateThemeDto } from './dto/update-theme.dto';
+import { ThemesService } from './themes.service';
 
 @ApiResponse({
   status: 403,
@@ -70,11 +80,11 @@ export class ThemesController {
   update(@Param('id') id: string, @Body() body: UpdateThemeDto) {
     return this.themesService.update(id, body);
   }
-  
+
   @ApiOperation({ summary: 'Delete a theme' })
-  @Delete(':id')  
+  @Delete(':id')
   @HttpCode(200)
-  delete(@Param('id') id: string){    
+  delete(@Param('id') id: string) {
     return this.themesService.delete(id);
   }
 }
