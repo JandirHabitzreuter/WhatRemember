@@ -1,3 +1,4 @@
+import { plainToInstance } from 'class-transformer';
 import { Public } from 'decorators/public.decorator';
 import { Roles } from 'decorators/roles.decorator';
 
@@ -60,7 +61,7 @@ export class UsersController {
   @Roles(Type_user.ADMIN)
   @Get()
   findAll() {
-    return this.usersService.findAll();
+    return plainToInstance(UserDto, this.usersService.findAll());
   }
 
   @Get(':id')
@@ -88,7 +89,6 @@ export class UsersController {
   @Roles(Type_user.ADMIN)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    console.log('caiu aqui');
     return this.usersService.update(id, updateUserDto);
   }
 
