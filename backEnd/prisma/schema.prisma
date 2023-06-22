@@ -26,6 +26,7 @@ enum Rating_User_Phrase {
 enum Type_user {
   ADMIN
   USER
+  
 }
 
 model User {

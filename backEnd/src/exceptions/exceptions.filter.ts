@@ -12,8 +12,10 @@ export class ExceptionsFilter<T> implements ExceptionFilter {
     const response = ctx.getResponse();
     const request = ctx.getRequest();
 
+    // console.log(exception); // left here to debug some errors that ocurred in the server
+
     if (exception instanceof HttpException) {
-      const message = exception.getResponse().message || exception.message;
+      const message = exception.message; // exception.getResponse().message ||
 
       const status = exception.getStatus();
       return response.status(status).json({
